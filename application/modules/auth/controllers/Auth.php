@@ -13,7 +13,7 @@ class Auth extends MY_Controller
 	{
 		parent::__construct();
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-		$this->lang->load('auth');
+		$this->lang->load('auth');;
 	}
 
 	/**
@@ -21,7 +21,6 @@ class Auth extends MY_Controller
 	 */
 	public function index()
 	{
-
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
@@ -35,23 +34,7 @@ class Auth extends MY_Controller
 		else
 		{
           redirect('/admin');
-//			$this->data['title'] = $this->lang->line('index_heading');
-//			
-//			// set the flash data error message if there is one
-//			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-//
-//			//list the users
-//			$this->data['users'] = $this->ion_auth->users()->result();
-//			
-//			//USAGE NOTE - you can do more complicated queries like this
-//			//$this->data['users'] = $this->ion_auth->where('field', 'value')->users()->result();
-//			
-//			foreach ($this->data['users'] as $k => $user)
-//			{
-//				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
-//			}
-//
-//			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'index', $this->data);
+
 		}
 	}
 
@@ -106,7 +89,8 @@ class Auth extends MY_Controller
 				'type' => 'password',
 			];
             
-            $this->data['page'] = 'login';
+            $this->data['page']='login';
+
 			$this->_render_page('tpl' . DIRECTORY_SEPARATOR . 'login_tpl', $this->data);
 		}
 	}
@@ -233,10 +217,7 @@ class Auth extends MY_Controller
 
 			// set any errors and display the form
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			
-            $this->data['page'] = 'forgot_password';
-			$this->_render_page('tpl' . DIRECTORY_SEPARATOR . 'login_tpl', $this->data);
-            //$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'forgot_password', $this->data);
+			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'forgot_password', $this->data);
 		}
 		else
 		{
@@ -455,12 +436,12 @@ class Auth extends MY_Controller
 		}
 	}
 
-	/**
+	    /**
 	 * Create a new user
 	 */
-	public function create_user()
-	{
-		$this->data['title'] = $this->lang->line('create_user_heading');
+  public function create_user()
+  {
+		$data['title'] = $this->lang->line('create_user_heading');
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
@@ -469,7 +450,7 @@ class Auth extends MY_Controller
 
 		$tables = $this->config->item('tables', 'ion_auth');
 		$identity_column = $this->config->item('identity', 'ion_auth');
-		$this->data['identity_column'] = $identity_column;
+		$data['identity_column'] = $identity_column;
 
 		// validate form input
 		$this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required');
@@ -512,60 +493,61 @@ class Auth extends MY_Controller
 		{
 			// display the create user form
 			// set the flash data error message if there is one
-			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+			$data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
-			$this->data['first_name'] = [
+			$data['first_name'] = [
 				'name' => 'first_name',
 				'id' => 'first_name',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('first_name'),
 			];
-			$this->data['last_name'] = [
+			$data['last_name'] = [
 				'name' => 'last_name',
 				'id' => 'last_name',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('last_name'),
 			];
-			$this->data['identity'] = [
+			$data['identity'] = [
 				'name' => 'identity',
 				'id' => 'identity',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('identity'),
 			];
-			$this->data['email'] = [
+			$data['email'] = [
 				'name' => 'email',
 				'id' => 'email',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('email'),
 			];
-			$this->data['company'] = [
+			$data['company'] = [
 				'name' => 'company',
 				'id' => 'company',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('company'),
 			];
-			$this->data['phone'] = [
+			$data['phone'] = [
 				'name' => 'phone',
 				'id' => 'phone',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('phone'),
 			];
-			$this->data['password'] = [
+			$data['password'] = [
 				'name' => 'password',
 				'id' => 'password',
 				'type' => 'password',
 				'value' => $this->form_validation->set_value('password'),
 			];
-			$this->data['password_confirm'] = [
+			$data['password_confirm'] = [
 				'name' => 'password_confirm',
 				'id' => 'password_confirm',
 				'type' => 'password',
 				'value' => $this->form_validation->set_value('password_confirm'),
 			];
 
-			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_user', $this->data);
+			$this->load->view('create_user', $data);
 		}
 	}
+    
 	/**
 	* Redirect a user checking if is admin
 	*/
@@ -656,14 +638,14 @@ class Auth extends MY_Controller
 				{
 					// redirect them back to the admin page if admin, or to the base url if non admin
 					$this->session->set_flashdata('message', $this->ion_auth->messages());
-					$this->redirectUser();
+					//$this->redirectUser();
 
 				}
 				else
 				{
 					// redirect them back to the admin page if admin, or to the base url if non admin
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
-					$this->redirectUser();
+					//$this->redirectUser();
 
 				}
 
@@ -724,8 +706,7 @@ class Auth extends MY_Controller
 	 */
 	public function create_group()
 	{
-		$this->data['title'] = $this->lang->line('create_group_title');
-
+		$data['title'] = $this->lang->line('create_group_title');
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
 			redirect('auth', 'refresh');
@@ -742,12 +723,12 @@ class Auth extends MY_Controller
 				// check to see if we are creating the group
 				// redirect them back to the admin page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect("auth", 'refresh');
+				redirect('admin', 'refresh');
 			}
 			else
-            		{
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
-            		}			
+            {
+              $this->session->set_flashdata('message', $this->ion_auth->errors());
+            }			
 		}
 			
 		// display the create group form
@@ -767,7 +748,7 @@ class Auth extends MY_Controller
 			'value' => $this->form_validation->set_value('description'),
 		];
 
-		$this->_render_page('auth/create_group', $this->data);
+		$this->load->view('auth/create_group', $this->data);
 		
 	}
 
@@ -807,7 +788,7 @@ class Auth extends MY_Controller
 				if ($group_update)
 				{
 					$this->session->set_flashdata('message', $this->lang->line('edit_group_saved'));
-					redirect("auth", 'refresh');
+					redirect("admin/groups", 'refresh');
 				}
 				else
 				{
@@ -821,7 +802,7 @@ class Auth extends MY_Controller
 
 		// pass the user to the view
 		$this->data['group'] = $group;
-
+        
 		$this->data['group_name'] = [
 			'name'    => 'group_name',
 			'id'      => 'group_name',
@@ -839,7 +820,7 @@ class Auth extends MY_Controller
 			'value' => $this->form_validation->set_value('group_description', $group->description),
 		];
 
-		$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'edit_group', $this->data);
+		$this->load->view('auth' . DIRECTORY_SEPARATOR . 'edit_group', $this->data);
 	}
 
 	/**

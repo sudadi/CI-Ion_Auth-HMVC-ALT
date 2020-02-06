@@ -7,7 +7,7 @@
  */
 
 
-class Admin extends MY_Controller {
+class Admin extends MY_Controller {  
   function __construct() {
     parent::__construct();
     $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -21,7 +21,31 @@ class Admin extends MY_Controller {
   }
   
   public function index() {
-    $this->load->view('tpl/main_tpl');
+    $data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+    $data['title'] = 'Dashboard';
+    $data['page'] = 'dashboard';
+    $this->load->view('tpl/main_tpl',$data);
+  }
+  
+  public function users() {      
+    $data['title'] = $this->lang->line('index_heading');
+    $data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+    $data['users'] = $this->ion_auth->users()->result();
+    
+    foreach ($data['users'] as $k => $user)
+    {
+      $data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+    }
+    $data['page'] = 'users';
+    $this->load->view('tpl/main_tpl', $data);
+  }
+  
+  public function groups() {      
+    $data['title'] = $this->lang->line('groups_heading');
+    $data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+    $data['groups'] = $this->ion_auth->groups()->result();
+    $data['page'] = 'groups';
+    $this->load->view('tpl/main_tpl', $data);
   }
  
 }

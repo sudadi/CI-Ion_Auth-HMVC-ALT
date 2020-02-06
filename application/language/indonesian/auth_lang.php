@@ -24,7 +24,7 @@ $lang['error_csrf'] = 'Form yang dikirim tidak lulus pemeriksaan keamanan kami.'
 // Login
 $lang['login_heading']         = 'Login';
 $lang['login_subheading']      = 'Silakan login dengan email/username dan password anda.';
-$lang['login_identity_label']  = 'Email/Username:';
+$lang['login_identity_label']  = 'Surel/Username:';
 $lang['login_password_label']  = 'Kata Sandi:';
 $lang['login_remember_label']  = 'Ingatkan Saya:';
 $lang['login_submit_btn']      = 'Login';
@@ -32,10 +32,10 @@ $lang['login_forgot_password'] = 'Lupa Kata Sandi?';
 
 // Index
 $lang['index_heading']           = 'Pengguna';
-$lang['index_subheading']        = 'Di bawah ini list dari para Pengguna.';
-$lang['index_fname_th']          = 'Nama Awal';
-$lang['index_lname_th']          = 'Nama Akhir';
-$lang['index_email_th']          = 'Email';
+$lang['index_subheading']        = 'Berikut adalah daftar Pengguna.';
+$lang['index_fname_th']          = 'Nama Depan';
+$lang['index_lname_th']          = 'Nama Belakang';
+$lang['index_email_th']          = 'Surel';
 $lang['index_groups_th']         = 'Grup';
 $lang['index_status_th']         = 'Status';
 $lang['index_action_th']         = 'Aksi';
@@ -45,7 +45,7 @@ $lang['index_create_user_link']  = 'Buat Pengguna baru';
 $lang['index_create_group_link'] = 'Buat grup baru';
 
 // Deactivate User
-$lang['deactivate_heading']                  = 'Deaktivasi Pengguna';
+$lang['deactivate_heading']                  = 'De-aktivasi Pengguna';
 $lang['deactivate_subheading']               = 'Anda yakin akan melakukan deaktivasi akun Pengguna \'%s\'';
 $lang['deactivate_confirm_y_label']          = 'Ya:';
 $lang['deactivate_confirm_n_label']          = 'Tidak:';
@@ -95,9 +95,16 @@ $lang['edit_user_validation_groups_label']           = 'Nama Grup';
 $lang['edit_user_validation_password_label']         = 'Kata Sandi';
 $lang['edit_user_validation_password_confirm_label'] = 'Konfirmasi Kata Sandi';
 
+// Groups
+$lang['groups_heading']     = 'Grup Pengguna';
+$lang['groups_subheading']  = 'Berikut adalah daftar Grup';
+$lang['groups_id_th']       = 'ID';
+$lang['groups_name_th']     = 'Nama Grup';
+$lang['groups_desc_th']     = 'Keterangan';
+
 // Create Group
 $lang['create_group_title']                  = 'Buat Grup';
-$lang['create_group_heading']                = 'Buat Grupp';
+$lang['create_group_heading']                = 'Buat Grup';
 $lang['create_group_subheading']             = 'Silakan masukan detail Grup di bawah ini.';
 $lang['create_group_name_label']             = 'Nama Grup:';
 $lang['create_group_desc_label']             = 'Deskripsi:';

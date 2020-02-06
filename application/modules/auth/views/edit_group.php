@@ -1,20 +1,30 @@
-<h1><?php echo lang('edit_group_heading');?></h1>
-<p><?php echo lang('edit_group_subheading');?></p>
 
-<div id="infoMessage"><?php echo $message;?></div>
 
-<?php echo form_open(current_url());?>
-
+<div class="modal-dialog">
+  <div class="modal-content">
+      <?=form_open("auth/edit_group/".$group->id);?>
+    <div class="modal-header">
+      <h4 class="modal-title"><?=lang('edit_group_heading');?></h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body"> 
+      <p><?=lang('edit_group_subheading');?></p>
+      <div id="infoMessage"><?=$message;?></div>
       <p>
-            <?php echo lang('edit_group_name_label', 'group_name');?> <br />
-            <?php echo form_input($group_name);?>
+            <?=lang('edit_group_name_label', 'group_name');?> <br />
+            <?=form_input($group_name);?>
       </p>
-
       <p>
-            <?php echo lang('edit_group_desc_label', 'description');?> <br />
-            <?php echo form_input($group_description);?>
+            <?=lang('edit_group_desc_label', 'description');?> <br />
+            <?=form_input($group_description);?>
       </p>
-
-      <p><?php echo form_submit('submit', lang('edit_group_submit_btn'));?></p>
-
-<?php echo form_close();?>
+      
+    </div>
+    <div class="modal-footer">
+      <p><?=form_submit('submit', lang('edit_group_submit_btn'));?></p>
+    </div>
+      <?=form_close();?>
+  </div>
+</div>
