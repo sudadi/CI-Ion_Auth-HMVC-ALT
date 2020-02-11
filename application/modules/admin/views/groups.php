@@ -24,29 +24,35 @@
               <td><?=$group->id;?></td>
               <td><?=htmlspecialchars($group->name,ENT_QUOTES,'UTF-8');?></td>
               <td><?=htmlspecialchars($group->description,ENT_QUOTES,'UTF-8');?></td>
-              <td><a href="#" onclick="editgroup('<?=$group->id;?>');">Edit</a></td>
+              <td><a href="javascript: void(0)" onclick="groupman('<?=$group->id;?>');">Edit</a></td>
             </tr>
             <?php endforeach;?>
           </table>
         </div>
       </div>
       <div class="card-footer">
-        <a href="#" id="addgroup" onclick="addgroup()" class="btn btn-sm btn-primary"><i class="fas fa-user-friends"></i> <?=lang('index_create_group_link');?></a>
+        <a href="javascript: void(0)" id="addgroup" onclick="groupman()" class="btn btn-sm btn-primary"><i class="fas fa-user-friends"></i> <?=lang('index_create_group_link');?></a>
       </div>
     </div>
   </div>
 </div>
-<div class="modal fade" id="modal-groups"></div>
+<div id="mymodal"></div>
 
 <script>  
-  function editgroup(id){
+  function groupman(id){
+    if (id) {
+      var url = "<?=base_url('auth/edit_group/')?>"+id;
+    } else {
+      var url = "<?=base_url('auth/create_group/')?>";
+    }
+    
     $.ajax({
-      url : "<?=base_url('auth/edit_group/')?>"+id,
+      url : url,
       type: "GET",
       dataType: "HTML",
       success: function(data)
       {
-        $("#modal-groups").html(data);
+        $("#mymodal").html(data);
         $("#modal-groups").modal();
       },
       error: function (jqXHR, textStatus, errorThrown)
@@ -57,21 +63,4 @@
     });
   }
   
-  function addgroup(){
-    $.ajax({
-      url : "<?=base_url('auth/create_group')?>",
-      type: "GET",
-      dataType: "HTML",
-      success: function(data)
-      {
-        $("#modal-groups").html(data);
-        $("#modal-groups").modal();
-      },
-      error: function (jqXHR, textStatus, errorThrown)
-      {
-        alert('Error : Data tidak ditemukan..!');
-        location.reload();
-      }
-    });
-  };
 </script>

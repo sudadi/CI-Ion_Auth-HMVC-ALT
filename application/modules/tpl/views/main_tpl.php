@@ -173,6 +173,7 @@
     <section class="content">
       <div class="container-fluid">
         <div id="infoMessage"><?=$message;?></div>
+        
         <?=$this->load->view($page);?>
         
       </div><!--/. container-fluid -->
@@ -207,5 +208,20 @@
 <script src="<?=asset_url();?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?=asset_url();?>js/adminlte.js"></script>
+<script>
+  var url = window.location;
+  // for sidebar menu entirely but not cover treeview
+  $('ul.nav-sidebar a').filter(function() {
+     return this.href == url;
+  }).addClass('active');
+  //Top bar
+  $('ul.navbar-nav a').filter(function() {
+     return this.href == url;
+  }).parent().addClass('active');
+  // for treeview
+  $('ul .nav-treeview a').filter(function() {
+     return this.href == url;
+   }).parentsUntil($('.nav-sidebar'), '.has-treeview').addClass('menu-open').children('a').addClass('active');
+</script>
 </body>
 </html>

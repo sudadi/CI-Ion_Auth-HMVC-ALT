@@ -5,15 +5,20 @@
  * @property Ion_auth|Ion_auth_model $ion_auth        The ION Auth spark
  * @property CI_Form_validation      $form_validation The form validation library
  */
-class Auth extends MY_Controller
+class Auth extends MX_Controller
 {
 	public $data = [];
 
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->database();
+		$this->load->library(['ion_auth', 'form_validation']);
+		$this->load->helper(['url', 'language']);
+
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
-		$this->lang->load('auth');;
+
+		$this->lang->load('auth');
 	}
 
 	/**
@@ -421,18 +426,19 @@ class Auth extends MY_Controller
 				// do we have a valid request?
 				if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
 				{
-					show_error($this->lang->line('error_csrf'));
+					$this->session->set_flashdata('message', $this->lang->line('error_csrf'));
 				}
 
 				// do we have the right userlevel?
 				if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
 				{
 					$this->ion_auth->deactivate($id);
+                    $this->session->set_flashdata('message', $this->ion_auth->messages());
 				}
 			}
 
 			// redirect them back to the auth page
-			redirect('auth', 'refresh');
+			redirect('admin/users', 'refresh');
 		}
 	}
 
@@ -487,7 +493,7 @@ class Auth extends MY_Controller
 			// check to see if we are creating the user
 			// redirect them back to the admin page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			redirect("admin/users", 'refresh');
 		}
 		else
 		{
@@ -553,7 +559,7 @@ class Auth extends MY_Controller
 	*/
 	public function redirectUser(){
 		if ($this->ion_auth->is_admin()){
-			redirect('auth', 'refresh');
+			redirect('admin/users', 'refresh');
 		}
 		redirect('/', 'refresh');
 	}
@@ -638,14 +644,14 @@ class Auth extends MY_Controller
 				{
 					// redirect them back to the admin page if admin, or to the base url if non admin
 					$this->session->set_flashdata('message', $this->ion_auth->messages());
-					//$this->redirectUser();
+					$this->redirectUser();
 
 				}
 				else
 				{
 					// redirect them back to the admin page if admin, or to the base url if non admin
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
-					//$this->redirectUser();
+					$this->redirectUser();
 
 				}
 
@@ -723,7 +729,7 @@ class Auth extends MY_Controller
 				// check to see if we are creating the group
 				// redirect them back to the admin page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('admin', 'refresh');
+				redirect('admin/groups', 'refresh');
 			}
 			else
             {
@@ -793,6 +799,7 @@ class Auth extends MY_Controller
 				else
 				{
 					$this->session->set_flashdata('message', $this->ion_auth->errors());
+                    redirect("admin/groups", 'refresh');
 				}				
 			}
 		}

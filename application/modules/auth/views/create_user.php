@@ -1,7 +1,7 @@
-
+<div class="modal fade" id="modal-users">
   <div class="modal-dialog">
     <div class="modal-content">      
-      <?=form_open("auth/create_user");?>
+      <?=form_open('auth/create_user', ['id'=>'form_cuser']);?>
       <div class="modal-header">
         <h4 class="modal-title"><?=lang('create_user_heading');?></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -9,7 +9,8 @@
         </button>
       </div>
       <div class="modal-body">        
-        <p><?=lang('create_user_subheading');?></p>
+        <p><?=lang('create_user_subheading');?></p>        
+      <div id="infoMessage"><?=$message;?></div>
         <p>
           <?=lang('create_user_fname_label', 'first_name');?> <br />
           <?=form_input($first_name);?>
@@ -58,5 +59,31 @@
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
+</div>
+<script>
+$("#form_cuser").submit(function(event){
+	event.preventDefault(); //prevent default action 
+	var post_url = $(this).attr("action"); //get form action url
+	var request_method = $(this).attr("method"); //get form GET/POST method
+	var form_data = $(this).serialize(); //Encode form elements for submission
+	
+	$.ajax({
+		url : post_url,
+		type: request_method,
+		data : form_data
+	}).done(function(response){ //
+          
+        if (response) {
+          $("#mymodal").hide();
+          $("#mymodal").html(response);
+          $("#modal-users").show();
+        } else {
+          location.reload();
+        }
+        
+	});
+});
+
+</script>
 
 
