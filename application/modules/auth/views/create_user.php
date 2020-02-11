@@ -4,13 +4,13 @@
       <?=form_open('auth/create_user', ['id'=>'form_cuser']);?>
       <div class="modal-header">
         <h4 class="modal-title"><?=lang('create_user_heading');?></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" onclick="location.reload();" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">        
         <p><?=lang('create_user_subheading');?></p>        
-      <div id="infoMessage"><?=$message;?></div>
+        <div class="text-danger" id="infoMessage"><?=$message;?></div>
         <p>
           <?=lang('create_user_fname_label', 'first_name');?> <br />
           <?=form_input($first_name);?>
@@ -51,7 +51,7 @@
       </p>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" onclick="location.reload();">Close</button>
         <?=form_submit('submit', lang('create_user_submit_btn'), 'class="btn btn-primary"');?>
       </div>
       <?=form_close();?>
@@ -68,15 +68,13 @@ $("#form_cuser").submit(function(event){
 	var form_data = $(this).serialize(); //Encode form elements for submission
 	
 	$.ajax({
-		url : post_url,
-		type: request_method,
-		data : form_data
-	}).done(function(response){ //
-          
+            url : post_url,
+            type: request_method,
+            data : form_data,
+	}).done(function(response){ //          
         if (response) {
-          $("#mymodal").hide();
           $("#mymodal").html(response);
-          $("#modal-users").show();
+          $("#modal-users").modal('show');
         } else {
           location.reload();
         }
