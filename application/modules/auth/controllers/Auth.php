@@ -506,28 +506,24 @@ class Auth extends MX_Controller
 				'id' => 'first_name',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('first_name'),
-                                'required' => 'required', 
 			];
 			$data['last_name'] = [
 				'name' => 'last_name',
 				'id' => 'last_name',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('last_name'),
-                                'required' => 'required', 
 			];
 			$data['identity'] = [
 				'name' => 'identity',
 				'id' => 'identity',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('identity'),
-                                'required' => 'required', 
 			];
 			$data['email'] = [
 				'name' => 'email',
 				'id' => 'email',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('email'),
-                                'required' => 'required', 
 			];
 			$data['company'] = [
 				'name' => 'company',
@@ -546,17 +542,15 @@ class Auth extends MX_Controller
 				'id' => 'password',
 				'type' => 'password',
 				'value' => $this->form_validation->set_value('password'),
-                                'required' => 'required', 
 			];
 			$data['password_confirm'] = [
 				'name' => 'password_confirm',
 				'id' => 'password_confirm',
 				'type' => 'password',
 				'value' => $this->form_validation->set_value('password_confirm'),
-                                'required' => 'required', 
 			];
 
-			$this->load->view('auth/create_user', $data);
+			$this->load->view('create_user', $data);
 		}
 	}
     
@@ -680,14 +674,12 @@ class Auth extends MX_Controller
 			'id'    => 'first_name',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('first_name', $user->first_name),
-                        'required' => 'required', 
 		];
 		$this->data['last_name'] = [
 			'name'  => 'last_name',
 			'id'    => 'last_name',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('last_name', $user->last_name),
-                        'required' => 'required', 
 		];
 		$this->data['company'] = [
 			'name'  => 'company',
@@ -754,7 +746,6 @@ class Auth extends MX_Controller
 			'id'    => 'group_name',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('group_name'),
-                        'required' => 'required', 
 		];
 		$this->data['description'] = [
 			'name'  => 'description',
@@ -824,7 +815,6 @@ class Auth extends MX_Controller
 			'id'      => 'group_name',
 			'type'    => 'text',
 			'value'   => $this->form_validation->set_value('group_name', $group->name),
-                        'required' => 'required', 
 		];
 		if ($this->config->item('admin_group', 'ion_auth') === $group->name) {
 			$this->data['group_name']['readonly'] = 'readonly';

@@ -69,7 +69,7 @@
           location.reload()
         } else {
           $("#mymodal").html(data);
-          $("#modal-users").modal('show');
+          $("#modal-users").modal();
         }
       },
       error: function (jqXHR, textStatus, errorThrown)
