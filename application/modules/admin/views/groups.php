@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <a href="javascript: void(0)" id="addgroup" onclick="groupman()" class="btn btn-sm btn-primary"><i class="fas fa-user-friends"></i> <?=lang('index_create_group_link');?></a>
+        <a href="javascript: void(0)" id="addgroup" onclick="groupman()" class="btn btn-sm btn-info"><i class="fas fa-user-friends"></i> <?=lang('index_create_group_link');?></a>
       </div>
     </div>
   </div>

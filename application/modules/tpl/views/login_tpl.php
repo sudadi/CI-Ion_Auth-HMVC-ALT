@@ -8,9 +8,8 @@
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="<?=asset_url();?>img/icons/favicon.ico"/>
 <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="<?=asset_url();?>css/adminlte.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?=asset_url();?>plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?=asset_url();?>plugins/fontawesome/css/all.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?=asset_url();?>css/util.css">
 	<link rel="stylesheet" type="text/css" href="<?=asset_url();?>css/login.css">

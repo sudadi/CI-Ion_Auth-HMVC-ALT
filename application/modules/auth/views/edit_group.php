@@ -23,7 +23,7 @@
 
       </div>
       <div class="modal-footer">
-        <p><?=form_submit('submit', lang('edit_group_submit_btn'));?></p>
+        <p><?=form_submit('submit', lang('edit_group_submit_btn'), 'class="btn btn-primary"');?></p>
       </div>
         <?=form_close();?>
     </div>

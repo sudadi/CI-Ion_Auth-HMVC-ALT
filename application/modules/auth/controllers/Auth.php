@@ -219,10 +219,10 @@ class Auth extends MX_Controller
 			{
 				$this->data['identity_label'] = $this->lang->line('forgot_password_email_identity_label');
 			}
-
+            $this->data['page']='forgot_password';
 			// set any errors and display the form
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'forgot_password', $this->data);
+			$this->_render_page('tpl' . DIRECTORY_SEPARATOR . 'login_tpl', $this->data);
 		}
 		else
 		{

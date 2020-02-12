@@ -11,7 +11,7 @@
   <title>Dashboard</title>
 
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="<?=asset_url();?>plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="<?=asset_url();?>plugins/fontawesome/css/all.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?=asset_url();?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
